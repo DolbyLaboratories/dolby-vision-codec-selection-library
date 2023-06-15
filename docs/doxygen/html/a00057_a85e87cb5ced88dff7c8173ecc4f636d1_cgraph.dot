@@ -1,0 +1,13 @@
+digraph "onCreate"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [label="onCreate",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="openFile",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$a00057.html#acd0224d6aee829fc45210f977168abb4",tooltip=" "];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="requestCameraPermissions",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$a00057.html#a6493c617f902a5479d741a4ee17d88b9",tooltip=" "];
+}
