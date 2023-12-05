@@ -253,7 +253,7 @@ public final class CodecBuilderImpl implements CodecBuilder {
 
         AtomicBoolean option = new AtomicBoolean(false);
 
-        Log.e("GetPlayableTrack", "getPlayableTrack: Blocking non HEVC Codecs " + this.outputFormat);
+        Log.d("GetPlayableTrack", "getPlayableTrack: Blocking non HEVC Codecs " + this.outputFormat);
         ArrayList<Track> tracks = videoTracks.parallelStream().filter(x -> {
 
                     //See if there are any Dolby tracks in the file, this filtering only applies to this case.
@@ -436,16 +436,19 @@ public final class CodecBuilderImpl implements CodecBuilder {
         //Build a format with the requirements a candidate codec will need to meet.
         MediaFormat targetFormat = new MediaFormat();
         targetFormat.setString(MediaFormat.KEY_MIME, format.getString(MediaFormat.KEY_MIME));
+        targetFormat.setInteger(MediaFormat.KEY_WIDTH, format.getInteger(MediaFormat.KEY_WIDTH));
+        targetFormat.setInteger(MediaFormat.KEY_HEIGHT, format.getInteger(MediaFormat.KEY_HEIGHT));
         targetFormat.setInteger(MediaFormat.KEY_PROFILE, format.getInteger(MediaFormat.KEY_PROFILE));
         targetFormat.setInteger(MediaFormat.KEY_LEVEL, format.getInteger(MediaFormat.KEY_LEVEL));
-        targetFormat.setInteger(MediaFormat.KEY_BIT_RATE, Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE)));
+        targetFormat.setFloat(MediaFormat.KEY_FRAME_RATE, format.getInteger(MediaFormat.KEY_FRAME_RATE));
+        //targetFormat.setInteger(MediaFormat.KEY_BIT_RATE, Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE)));
         MediaCodecList mediaCodecList = new MediaCodecList(MediaCodecList.REGULAR_CODECS);
         String decoder = mediaCodecList.findDecoderForFormat(targetFormat);
         return decoder;
     }
 
 
-    public MediaFormat getDedcodedFormat() {
+    public MediaFormat getDecodedFormat() {
         return this.decoderFormat;
     }
 
